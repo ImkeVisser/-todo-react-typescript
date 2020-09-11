@@ -1,5 +1,8 @@
 import React from "react";
-import "./TodoListItem.css";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 interface TodoListItemProps {
     todo: Todo;
@@ -7,15 +10,18 @@ interface TodoListItemProps {
 }
 
 export const TodoListItem: React.FC<TodoListItemProps> = ({
-    todo,
-    toggleTodo
+    todo
 }) => {
     return (
-        <li>
-            <label className={todo.complete ? "complete" : undefined}>
-                <input type="checkbox" checked={todo.complete} onChange={() => toggleTodo(todo)} />
-                {todo.text}
-            </label>
-        </li>
+        <FormControlLabel
+            control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name={todo.id} />}
+            label={todo.text}
+        />
+
     );
 }
+
+{/* <FormLabel className={todo.complete ? "complete" : undefined}>
+<input type="checkbox" checked={todo.complete} onChange={() => toggleTodo(todo)} />
+{todo.text}
+</FormLabel> */}
