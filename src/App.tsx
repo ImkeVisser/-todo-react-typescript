@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { TodoList } from './TodoList';
-import { AddTodoForm } from './AddTodoForm';
+import { TodoList } from './components/TodoList';
+import { AddTodoForm } from './components/AddTodoForm';
 import { v4 as uuid } from 'uuid';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -20,30 +20,20 @@ const InitialTodos: Array<Todo> = [
 const App: React.FC = () => {
   const classes = useStyles();
 
+  //state
   const [todos, setTodos] = useState(InitialTodos);
 
-  const toggleTodo: ToggleTodo = selectedTodo => {
-    const newTodos = todos.map(todo => {
-      if (todo === selectedTodo) {
-        return {
-          ...todo,
-          complete: !todo.complete
-        }
-      }
-      return todo;
-    })
-    setTodos(newTodos)
-  }
 
+
+  //add Todos from Form
   const addTodo: AddTodo = newTodo => {
-    newTodo.trim() !== "" &&
-      setTodos([...todos, { id: uuid(), text: newTodo, complete: false }])
+    setTodos([...todos, { id: uuid(), text: newTodo, complete: false }])
   }
 
   return (
     <React.Fragment>
-      <Container className={classes.margin} component="main" maxWidth="xs">
-        <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <Container className={classes.margin} component="main" maxWidth="sm">
+        <TodoList todos={todos} />
         <AddTodoForm addTodo={addTodo} />
       </Container>
     </React.Fragment>

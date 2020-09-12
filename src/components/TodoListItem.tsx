@@ -6,7 +6,6 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 interface TodoListItemProps {
     todo: Todo;
-    toggleTodo: ToggleTodo;
 }
 
 export const TodoListItem: React.FC<TodoListItemProps> = ({
@@ -21,7 +20,3 @@ export const TodoListItem: React.FC<TodoListItemProps> = ({
     );
 }
 
-{/* <FormLabel className={todo.complete ? "complete" : undefined}>
-<input type="checkbox" checked={todo.complete} onChange={() => toggleTodo(todo)} />
-{todo.text}
-</FormLabel> */}
