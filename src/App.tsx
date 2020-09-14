@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TodoList } from './components/TodoList';
 import { AddTodoForm } from './components/AddTodoForm';
 import { v4 as uuid } from 'uuid';
@@ -11,30 +11,41 @@ const useStyles = makeStyles({
   },
 });
 
-const InitialTodos: Array<Todo> = [
-  { id: uuid(), text: "Monstera", complete: true },
-  { id: uuid(), text: "cactus", complete: false },
-  { id: uuid(), text: "string of hearts", complete: true }
+const InitialPlants: Array<Todo> = [
+  // { id: uuid(), text: "Monstera", complete: true },
+  // { id: uuid(), text: "cactus", complete: false },
+  // { id: uuid(), text: "string of hearts", complete: true }
 ];
 
 const App: React.FC = () => {
   const classes = useStyles();
 
   //state
-  const [todos, setTodos] = useState(InitialTodos);
+  const [plants, setPlants] = useState(InitialPlants);
 
+  //get local storage first time App renders
+  useEffect(() => {
+    const InitialPlants = localStorage.getItem('plants');
+    if (InitialPlants) {
+      setPlants(JSON.parse(InitialPlants));
+    }
+  }, [])
 
+  //storage
+  useEffect(() => {
+    localStorage.setItem('plants', JSON.stringify(plants))
+  }, [plants])
 
   //add Todos from Form
-  const addTodo: AddTodo = newTodo => {
-    setTodos([...todos, { id: uuid(), text: newTodo, complete: false }])
+  const addPlant: AddTodo = newPlant => {
+    setPlants([...plants, { id: uuid(), text: newPlant, complete: false }])
   }
 
   return (
     <React.Fragment>
       <Container className={classes.margin} component="main" maxWidth="sm">
-        <TodoList todos={todos} />
-        <AddTodoForm addTodo={addTodo} />
+        <TodoList plants={plants} />
+        <AddTodoForm addPlant={addPlant} />
       </Container>
     </React.Fragment>
   );

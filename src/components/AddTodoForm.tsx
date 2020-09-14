@@ -11,17 +11,17 @@ const useStyles = makeStyles({
 });
 
 interface AddTodoFormProps {
-    addTodo: AddTodo;
+    addPlant: AddTodo;
 }
 
-export const AddTodoForm: React.FC<AddTodoFormProps> = ({ addTodo }) => {
+export const AddTodoForm: React.FC<AddTodoFormProps> = ({ addPlant }) => {
     const classes = useStyles();
 
     const [text, setText] = useState('');
 
     const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        addTodo(text);
+        addPlant(text);
         setText('')
     };
 

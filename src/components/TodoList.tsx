@@ -9,10 +9,10 @@ import FormControl from '@material-ui/core/FormControl';
 
 
 interface TodoListProps {
-    todos: Array<Todo>;
+    plants: Array<Todo>;
 }
 
-export const TodoList: React.FC<TodoListProps> = ({ todos }) => {
+export const TodoList: React.FC<TodoListProps> = ({ plants }) => {
 
     return (
         <Card >
@@ -29,8 +29,8 @@ export const TodoList: React.FC<TodoListProps> = ({ todos }) => {
                         Did I water my plants?
                     </Typography>
                     <FormControl>
-                        {todos.map(todo => {
-                            return <TodoListItem key={todo.id} todo={todo} />;
+                        {plants.map(plant => {
+                            return <TodoListItem key={plant.id} todo={plant} />;
                         })}
                     </FormControl>
                 </CardContent>
